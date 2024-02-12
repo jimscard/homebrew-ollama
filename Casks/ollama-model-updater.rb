@@ -7,14 +7,15 @@ cask "ollama-model-updater" do
 
     url "https://github.com/technovangelist/ollamamodelupdater/releases/download/v#{version}/macos-#{arch}-ollamamodelupdate"
 
-    name "Ollama Model Updater"
-    desc "Looks at all Ollama models on the system and pulls the mode if updated on ollama.ai"
-    homepage "https://github.com/technovangelist/ollamamodelupdater"
+    name 'Ollama Model Updater'
+    desc 'Looks at all Ollama models on the system and pulls the mode if updated on ollama.ai'
+    homepage 'https://github.com/technovangelist/ollamamodelupdater'
 
     livecheck do
         url :homepage
         regex(/^v?(\d+(?:\.\d+)+)$/i)
     end
 
-    binary "macos-#{arch}-ollamamodelupdate", target: "ollamamodelupdate"
+    binary "macos-#{arch}-ollamamodelupdate", target: 'ollamamodelupdate'
+    binary "macos-#(arch)-ollamamodelupdate", target: 'ollama-model-update'
 end
