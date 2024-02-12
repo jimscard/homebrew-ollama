@@ -17,5 +17,5 @@ cask "ollama-model-updater" do
     end
 
     binary "macos-#{arch}-ollamamodelupdate", target: 'ollamamodelupdate'
-    binary "macos-#(arch)-ollamamodelupdate", target: 'ollama-model-update'
+    binary "macos-#{arch}-ollamamodelupdate", target: 'ollama-model-update'
 end
