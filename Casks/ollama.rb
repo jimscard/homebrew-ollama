@@ -1,6 +1,6 @@
 cask "ollama" do
-  version "0.1.31"
-  sha256 "32ecf25804decf13f23d181b438e5d494688bb828e0657c7f077d2bf172efbb6"
+  version "0.2.5"
+  sha256 "f7f76c1b404399305d59d6ef71e40dfd078c3b28120f281728a32e54ffa5c680"
 
   url "https://github.com/ollama/ollama/releases/download/v#{version}/Ollama-darwin.zip",
       verified: "github.com/ollama/ollama/"
@@ -22,6 +22,6 @@ cask "ollama" do
 
   zap trash: [
     "$HOME/.ollama",
-    "$HOME/Library/Application Support/Ollama"
+    "$HOME/Library/Application Support/Ollama",
   ]
 end

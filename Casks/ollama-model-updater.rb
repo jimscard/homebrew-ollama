@@ -1,9 +1,11 @@
 cask "ollama-model-updater" do
   arch arm: "arm64", intel: "x86"
 
-  version "0.1.7"
-  sha256  arm: "04a318305e5ac2d1a6c06760d216d8ca9ae43aaab89d719d2b266f3bd0885bf",
-          intel: "4d38c5c35a81578285e05d13d32de2a25126a4718ec05569299f96be15320d23"
+
+  version "0.1.8"
+  sha256  arm:   "fa821869150a249e71931239aecab0e0fa95fb7f70f6cd667246aeefc63b4ec4",
+          intel: "71c4dfc0c6fee4a3fb926e32891cb7af13f2832d89ea36a9bd5bab1701f1f190"
+
 
   url "https://github.com/technovangelist/ollamamodelupdater/releases/download/v#{version}/macos-#{arch}-ollamamodelupdate"
   name "Ollama Model Updater"
@@ -17,7 +19,9 @@ cask "ollama-model-updater" do
 
   # The original maintainer uses ollamamodelupdate (no r)
   binary "macos-#{arch}-ollamamodelupdate", target: "ollamamodelupdate"
-  # For consistency with the repository name, let"s link in with the r as well.
+
+  # For consistency with the repository name, let's link in with the r as well.
+
   binary "macos-#{arch}-ollamamodelupdate", target: "ollamamodelupdater"
   # I prefer to separate the words with hyphens
   binary "macos-#{arch}-ollamamodelupdate", target: "ollama-model-update"
