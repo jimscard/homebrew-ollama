@@ -20,7 +20,7 @@ jobs:
       # uses: reitermarkus/automerge@634d0a4b51134c163eee182ac9aa79133eb33e8d
       - uses: reitermarkus/automerge@v2.8.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Ensure the token is set correctly
+          token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
           merge-method: merge # Set a default merge method
           squash-title: '' # Optional, set if needed
           squash-commit-title: '' # Optional, set if needed
