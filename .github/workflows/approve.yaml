@@ -11,9 +11,9 @@ jobs:
     name: approve
       if: github.actor == 'jimscard'
         steps:
-         - uses: hmarr/auto-approve-action@v4
-            with:
-              token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
+     #    - uses: hmarr/auto-approve-action@v4
+            #with:
+              #token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
       if: github.actor == 'dependabot'
         steps:
           - uses: hmarr/auto-approve-action@v4
