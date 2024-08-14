@@ -2,12 +2,12 @@ name: Auto approve trusted
 on:
   pull_request_target:
 
-permissions:
-  pull-requests: write
 
 jobs:
   approve:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     name: approve
     steps:
       - uses: hmarr/auto-approve-action@v4
@@ -17,6 +17,8 @@ jobs:
   auto-merge:
     name: auto-merge
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests:write
     needs: approve
     steps:
       # You may pin to the exact commit or the version.
