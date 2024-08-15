@@ -2,22 +2,23 @@ name: Auto approve trusted
 on:
   pull_request_target:
 
-
 jobs:
   approve:
     runs-on: ubuntu-latest
+
+    name: approve
+    if: github.actor == 'jimscard'
     permissions:
       pull-requests: write
-    name: approve
-      if: github.actor == 'jimscard'
-        steps:
-     #    - uses: hmarr/auto-approve-action@v4
-            #with:
-              #token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
-      if: github.actor == 'dependabot'
-        steps:
-          - uses: hmarr/auto-approve-action@v4
-              
+    steps:
+      - uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
+
+    # if: github.actor == 'dependabot'
+    # steps:
+    #   - uses: hmarr/auto-approve-action@v4
+
   auto-merge:
     name: auto-merge
     runs-on: ubuntu-latest
@@ -25,8 +26,6 @@ jobs:
       pull-requests: write
     needs: approve
     steps:
-      # You may pin to the exact commit or the version.
-      # uses: reitermarkus/automerge@634d0a4b51134c163eee182ac9aa79133eb33e8d
       - uses: reitermarkus/automerge@v2.8.0
         with:
           token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
