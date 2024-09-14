@@ -1,34 +1,33 @@
-name: Auto approve trusted
+name: Auto approve and merge trusted PRs
+
 on:
   pull_request_target:
 
 jobs:
   approve:
     runs-on: ubuntu-latest
-
-    name: approve
-    if: github.actor == 'jimscard'
+    name: Approve
+    if: github.actor == 'jimscard' || github.actor == 'dependabot[bot]'
     permissions:
       pull-requests: write
     steps:
       - uses: hmarr/auto-approve-action@v4
         with:
-          github-token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
-
-    # if: github.actor == 'dependabot'
-    # steps:
-    #   - uses: hmarr/auto-approve-action@v4
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   auto-merge:
-    name: auto-merge
+    name: Auto-merge
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pull-requests: write
     needs: approve
+    if: github.actor == 'jimscard' || github.actor == 'dependabot[bot]'
     steps:
       - uses: reitermarkus/automerge@v2.8.0
         with:
-          token: ${{ secrets.BUMPER_TOKEN }} # Ensure the token is set correctly
-          merge-method: merge # Set a default merge method
-          review-author-associations: OWNER,MEMBER,COLLABORATOR # Default value
-          dry-run: false # Ensure this is set correctly
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: squash
+          do-not-merge-labels: do-not-merge, wip
+          required-labels: ready-to-merge
+          pull-request: ${{ github.event.pull_request.number }}
