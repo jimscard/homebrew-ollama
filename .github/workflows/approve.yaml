@@ -2,34 +2,32 @@ name: Auto approve and merge trusted PRs
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize]  # Trigger the workflow on pull request open and synchronize events
 
 jobs:
   approve:
-    runs-on: ubuntu-latest
-    id: approve
-    if: github.actor == 'jimscard' || github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest  # Specify the environment to run the job
+    if: github.actor == 'jimscard' || github.actor == 'dependabot[bot]'  # Condition to run this job only for specific users
     permissions:
-      pull-requests: write
+      pull-requests: write  # Grant write permissions to pull requests
     steps:
-      - uses: hmarr/auto-approve-action@v4
+      - uses: hmarr/auto-approve-action@v4  # Use the auto-approve action
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}  # Provide the GitHub token for authentication
 
   auto-merge:
-    name: Auto-merge
-    runs-on: ubuntu-latest
-    id: auto-merge
+    name: Auto-merge  # Name of the job
+    runs-on: ubuntu-latest  # Specify the environment to run the job
     permissions:
-      contents: write
-      pull-requests: write
-    needs: approve
-    if: github.actor == 'jimscard' || github.actor == 'dependabot[bot]'
+      contents: write  # Grant write permissions to repository contents
+      pull-requests: write  # Grant write permissions to pull requests
+    needs: approve  # This job depends on the successful completion of the 'approve' job
+    if: github.actor == 'jimscard' || github.actor == 'dependabot[bot]'  # Condition to run this job only for specific users
     steps:
-      - uses: reitermarkus/automerge@v2.8.0
+      - uses: reitermarkus/automerge@v2.8.0  # Use the automerge action
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          merge-method: squash
-          do-not-merge-labels: do-not-merge, wip
-          required-labels: ready-to-merge
-          pull-request: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # Provide the GitHub token for authentication
+          merge-method: squash  # Use squash method for merging
+          do-not-merge-labels: do-not-merge, wip  # Labels that prevent merging
+          required-labels: ready-to-merge  # Labels required for merging
+          pull-request: ${{ github.event.pull_request.number }}  # Specify the pull request number
