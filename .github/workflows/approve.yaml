@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: hmarr/auto-approve-action@v4  # Use the auto-approve action
         with:
-          github-token: ${{ secrets.PAT_TOKEN }}  # Provide the GitHub token for authentication
+          github-token: ${{ secrets.BOT_TOKEN }}  # Provide the GitHub token for authentication
   auto-merge:
     name: Auto-merge  # Name of the job
     runs-on: ubuntu-latest  # Specify the environment to run the job
